@@ -24,3 +24,8 @@ Run `pip install -r requirements.txt` to install dependencies.
 - Flask
 - pandas
 - HTML/CSS for the dashboard
+
+## App preview:
+1. [list](screenshots/list.png)
+2. [alert](screenshots/alert.png)
+3. [top10](screenshots/top10.png)

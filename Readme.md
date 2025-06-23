@@ -26,6 +26,6 @@ Run `pip install -r requirements.txt` to install dependencies.
 - HTML/CSS for the dashboard
 
 ## App preview:
-1. [list](screenshots/list.png)
+1. [top10](screenshots/top10.png)
 2. [alert](screenshots/alert.png)
-3. [top10](screenshots/top10.png)
+3. [plot](screenshots/plot.png)

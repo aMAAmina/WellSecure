@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>WellSecure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Top 10 IPs</h2>
+        <div class="table-container">
+            {% if top_ips %}
+                {{ top_ips|safe }}
+            {% endif %}
+        </div>
+
+        <div class="alert">
+            <h2>
+                <strong>Alert:</strong> 
+                High DoS activity , malicious IP detected {{ top_ip }}, its count is {{ top_ip_count }} .
+            </h2>
+        </div>
+
+
+        <h1>Source IP Ping Attempts Over Time</h1>
+        <div class="chart-container">
+            <canvas id="pingChart" width="800" height="400"></canvas>
+        </div>
+        <script>
+            const labels = {{ chart_labels|safe }};
+            const datasets = {{ chart_data|safe }};
+            const ctx = document.getElementById('pingChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets.map(ds => ({
+                        label: ds.label,
+                        data: ds.data,
+                        fill: false,
+                        borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+                        tension: 0.1
+                    }))
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Time (rounded)' } },
+                    y: { title: { display: true, text: 'Ping Attempts' }, beginAtZero: true }
+                }
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
